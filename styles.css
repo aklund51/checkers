@@ -2,11 +2,11 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #fefefe;
-  color: #333;
+  color: #181818;
 }
 
 header {
-  background: #5e0000;
+  background: #760404;
   color: white;
   padding: 2rem 1rem;
   text-align: center;
@@ -20,7 +20,7 @@ main {
 
 h2 {
   margin-top: 2rem;
-  color: #5e0000;
+  color: #000000;
 }
 
 .video-wrapper {
@@ -55,7 +55,7 @@ blockquote {
   font-style: italic;
   background: #f1f1f1;
   padding: 1rem;
-  border-left: 4px solid #5e0000;
+  border-left: 4px solid #000000;
 }
 
 footer {

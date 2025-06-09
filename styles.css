@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #fefefe;
-  color: #181818;
+  color: #000000;
 }
 
 header {
@@ -21,6 +21,12 @@ main {
 h2 {
   margin-top: 2rem;
   color: #000000;
+}
+
+
+h3 {
+  margin-top: 2rem;
+  color: #181818;
 }
 
 .video-wrapper {

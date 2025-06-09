@@ -8,29 +8,83 @@
 </head>
 <body>
   <header>
-    <h1>Checkers Robot Project</h1>
-    <p>A final robotics showcase</p>
+    <h1>Autonomous Checkers-Playing Robot: ECE118 Final Project</h1>
+    <p>Spring 2025: Natalie Moncada, Andrew Barth-Yi, and Allison Lund</p>
   </header>
 
-  <main>
+    <main>
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        The checkers-playing robot begins by waiting for the player to initialize the starting configuration of the board. 
+        Once the "Play" button is pressed, the robot validates the board state to ensure it is playable, or at least one 
+        red player piece and one blue bot piece are present.
+
+        The green LED turns on to indicate it is the player's turn. After the player completes their move by relocating a 
+        piece from its starting to ending position, they must press the "Play" button again. If the move is illegal, the red 
+        LED flashes to prompt the player to retry their turn. If the move is valid, the robot removes any captured pieces 
+        from the player's turn and then proceeds to make its own move.  
+      </p>
+    </section>
+
+
     <section id="video-demo">
       <h2>Video Demonstration</h2>
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
       </div>
-      <p class="caption">Explanation of how the robot works (insert voiceover or subtitles in actual video).</p>
+      <p class="caption">Checkers-playing robot in action.</p>
     </section>
 
     <section id="summary">
       <h2>System Summary</h2>
       <p>
-        [Brief summary of your checkers-playing robot system, including sensors used,
-        motor control strategy, and game logic.]
+        The checkers-playing robot uses a matrix of Hall-effect sensors to map the board conficuration, two stepper motors
+        to move the gripper along the x-axis and y-axis to a target square on the board, and a vacuum pump to grip and move 
+        checkers pieces across the game board.
       </p>
+
+      <h3>1. Board State</h3>
+      <p>
+        The board contains 32 Hall-effect sensors arranged in 8 rows and 4 columns. To capture the current board state, the 
+        Uno32 microcontroller reads one Hall-effect sensor at a time by iterating through all 32 playable squares on the board 
+        using selection bits.
+
+        A 3-bit row selector connects to two demultiplexers, which supply power to the left and right pairs of Hall-effect 
+        sensors in the selected row. Meanwhile, a 2-bit column-select multiplexer routes the active Hall-effect sensor output 
+        to the microcontroller. Each reading is saved to a 2D matrix representing the current state of the board.
+      </p>
+
+      <h3>2. Gantry</h3>
+      <p>
+        The gantry moves the gripper payload to a target location by converting the XY coordinates of a board square measured
+        in millimeters from the "home" position—into the corresponding number of motor steps. This step count is calculated 
+        based on the current position of the gantry to accurately reach the target location.
+      </p>    
+      
+      <h3>.3 Vacuum Grip</h3>
+      <p>
+        The pick up and drop off functionality are controlled through driving the solenoid and DC vacuum pump. The pick up function
+        enables the vacuum pump to turn on and the solenoid to lower towards the surface of the board. When moving the piece, the 
+        solenoid enable shuts off to eleveate the piece. When the gantry routes to the destination position, the vacuum enable is
+        stopped and the piece falls into place. 
+
+      </p>
+
+      <h3>.3 Game</h3>
+      <p>
+        Player moves are decoded through comparing the board state with a simulated board state of every possible legal move that can
+        be applied to the previous state of the board. When a match is found the move structure is saved for the robot to discard of
+        captured pieces from the player's turn. The robot generates moves by utilizing the same legal move generator, only for the 
+        robot's pieces. These moves are transfered to a min-max algorithm to dertemine the optimal move for robot given the current 
+        board state. 
+      </p>
+
     </section>
 
+  
     <section id="photos">
-      <h2>Key Component Photos</h2>
+      <h2>Key Components</h2>
       <div class="photo-grid">
         <img src="images/component1.jpg" alt="Component 1">
         <img src="images/component2.jpg" alt="Component 2">

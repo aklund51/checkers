@@ -1,1 +1,1 @@
-# CheckerBotWebsite
+# ECE118 Checkers Robot Website
